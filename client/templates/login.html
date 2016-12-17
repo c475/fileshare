@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mediacenter login</title>
+</head>
+
+<body style="background-color: #000000;">
+
+    <div style="margin: 0 auto; font-family: monospace; color: white; text-align: center; margin-top: 12%;">
+
+        <h2 style="font-size: 6em">Login</h2>
+
+        {% if form.errors %}
+        <p style="color: red;">* Invalid username or password.</p>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+
+            <h4>{{ form.username.label_tag }}</h4>
+            {{ form.username }}
+
+            <h4>{{ form.password.label_tag }}</h4>
+            {{ form.password }}
+
+            <br><br>
+
+            <button type="submit">Sign in</button>
+
+            <input type="hidden" name="next" value="{{ next }}" />
+
+        </form>
+
+        <br>
+
+        <h4><a style="color: lawngreen;" href="/register">Or register</a></h4>
+
+    </div>
+
+</body>
+
+</html>

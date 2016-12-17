@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Thing</title>
+
+</head>
+
+<body>
+
+    <h1>Testing</h1>
+
+</body>
+
+<script type="text/javascript">
+
+window.onload = function() {
+
+    var Crossbar = {
+
+        connection: null,
+        session: null,
+        socketUpdate: true,
+
+        initialize: function() {
+            var self = this;
+
+            this.connection = new autobahn.Connection({
+                url: 'wss://' + document.location.host + ':8080/ws',
+                realm: 'mediacenter',
+                authmethods: ['wampcra'],
+                authid: '{{ user.pk }}',
+                onchallenge: function(session, method, extra) {
+                    return autobahn.auth_cra.sign('{{ key }}', extra.challenge);
+                }
+            });
+
+            this.connection.onopen = function(session, details) {
+                self.session = session;
+
+            };
+
+            this.connection.onclose = function(reason, details) {
+                console.info("CONNECTION CLOSED: ", reason, details);
+            };
+
+            this.connection.open();
+        },
+
+        rpc: function (endpoint, args, callback) {
+            if (this.session) {
+
+                success = function (response) {
+                    if (callback) {
+                        callback(response);
+                    }
+                };
+
+                error = function (error) {
+                    console.info(endpoint + " error: ", error);
+                };
+
+                // if (typeof args === 'undefined' || args === null) {
+                //     args = {room: State.room};
+                // } else if (typeof args === 'object') {
+                //     args.room = State.room;
+                // }
+
+                args = { socket: this.session._id };
+
+                this.session.call(endpoint, [args]).then(success, error);
+
+            } else {
+                console.info("Attempted RPC call with no session.");
+            }
+        },
+
+        subscribe: function (endpoint, callback) {
+            if (this.session) {
+
+                success = function (subscription) {
+                    console.info("subscribed to " + endpoint + ": ", subscription);
+                };
+
+                error = function (error) {
+                    cosole.info("error subscribing to " + endpoint + ": " + error);
+                };
+
+                // this.session.subscribe(State.room + '.' + endpoint, callback).then(success, error);
+            }
+        },
+
+        register: function (endpoint, procedure) {
+            if (this.session) {
+
+                success = function (registered) {
+                    console.info("procedure registered", registered);
+                };
+
+                error = function (error) {
+                    console.info("failed to register procedure", error);
+                };
+
+                this.session.register(endpoint, procedure).then(success, error);
+            }
+        },
+
+        publish: function (endpoint, args) {
+            this.session.publish(endpoint, args);
+        }
+    };
+
+    Crossbar.initialize();
+};
+
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register...</title>
+</head>
+
+<body style="background-color: #000000;">
+
+    <div style="margin: 0 auto; font-family: monospace; color: white; text-align: center; margin-top: 12%;">
+
+        <h2 style="font-size: 6em">Register</h2>
+
+        {% if form.username.errors %}
+        <p style="color: red;">{{ form.username.errors.as_text }}</p>
+        {% endif %}
+
+        {% if form.password1.errors %}
+        <p style="color: red;">{{ form.password1.errors.as_text }}</p>
+        {% endif %}
+
+        {% if form.password2.errors %}
+        <p style="color: red;">{{ form.password2.errors.as_text }}</p>
+        {% endif %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <h4>{{ form.username.label_tag }}</h4>
+            {{ form.username }}
+
+            <h4>{{ form.password1.label_tag }}</h4>
+            {{ form.password1 }}
+
+            <h4>{{ form.password2.label_tag }}</h4>
+            {{ form.password2 }}
+
+            <br><br>
+
+            <input type="submit" value="Register" />
+
+        </form>
+
+        <br>
+
+        <h4><a style="color: lawngreen;" href="/login">Back to login</a></h4>
+
+    </div>
+
+</body>
+
+</html>
