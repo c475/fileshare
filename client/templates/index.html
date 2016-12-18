@@ -4,7 +4,17 @@
 
 <head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+
     <title>Thing</title>
+
+    {% load staticfiles %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 </head>
 
@@ -13,6 +23,10 @@
     <h1>Testing</h1>
 
 </body>
+
+<script src="{% static 'js/autobahn.js' %}"></script>
+<script src="{% static 'js/ractive.js' %}"></script>
+<script src="{% static 'js/adapter.js' %}"></script>
 
 <script type="text/javascript">
 
@@ -29,12 +43,12 @@ window.onload = function() {
 
             this.connection = new autobahn.Connection({
                 url: 'wss://' + document.location.host + ':8080/ws',
-                realm: 'mediacenter',
-                authmethods: ['wampcra'],
-                authid: '{{ user.pk }}',
-                onchallenge: function(session, method, extra) {
-                    return autobahn.auth_cra.sign('{{ key }}', extra.challenge);
-                }
+                realm: 'realm1',
+                // authmethods: ['wampcra'],
+                // authid: '{{ user.pk }}',
+                // onchallenge: function(session, method, extra) {
+                //     return autobahn.auth_cra.sign('{{ key }}', extra.challenge);
+                // }
             });
 
             this.connection.onopen = function(session, details) {

@@ -1,0 +1,4 @@
+django
+crossbar[all]
+django-redis-sessions
+gunicorn
