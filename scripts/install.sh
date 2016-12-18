@@ -1,12 +1,25 @@
-apt-get update
-apt-get upgrade
-apt-get dist-upgrade
-apt-get install build-essential
-apt-get auto-remove
+apt-get -y update
+apt-get -y upgrade
+apt-get -y dist-upgrade
+apt-get install -y build-essential
+apt-get install -y nginx
+apt-get install -y sqlite3
+apt-get install -y python-dev
+apt-get install -y python-pip
+apt-get install -y libpq-dev
+apt-get install -y libxml2-dev
+apt-get install -y libxslt1-dev
+apt-get install -y libldap2-dev
+apt-get install -y libsasl2-dev
+apt-get install -y libffi-dev
+apt-get install -y redis-server
+apt auto-remove
 
-sudo apt-get install nginx
-sudo apt-get install sqlite3
+pip install --upgrade pip
 
-sudo apt-get install python-dev
-sudo apt-get install python-pip
-sudo pip install -r /srv/requirements.txt
+git clone https://github.com/c475/fileshare.git /srv/
+
+pip install -r /srv/requirements.txt
+
+cp /srv/config/crossbar.service /etc/systemd/system
+cp /srv/config/gunicorn.service /etc/systemd/system
