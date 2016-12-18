@@ -5,19 +5,19 @@
             "type": "router",
             "realms": [
                 {
-                    "name": "realm1",
+                    "name": "default",
                     "roles": [
                         {
-                            "name": "anonymous",
+                            "name": "main",
                             "permissions": [
                                 {
-                                    "uri": "",
+                                    "uri": "*",
                                     "match": "prefix",
                                     "allow": {
-                                        "call": true,
+                                        "call": false,
                                         "register": true,
                                         "publish": true,
-                                        "subscribe": true
+                                        "subscribe": false
                                     },
                                     "disclose": {
                                         "caller": false,
@@ -35,13 +35,14 @@
                     "type": "web",
                     "endpoint": {
                         "type": "tcp",
-                        "port": 8080
+                        "port": 8080,
+                        "tls": {
+                           "key": "/etc/ssl/private/mediacenter.key",
+                           "certificate": "/etc/ssl/certs/ytdjb.crt",
+                           "ciphers": "ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AES:RSA+3DES:!ADH:!AECDH:!MD5:!DSS"
+                        }
                     },
                     "paths": {
-                        "/": {
-                            "type": "static",
-                            "directory": "../web"
-                        },
                         "ws": {
                             "type": "websocket"
                         }
@@ -59,16 +60,18 @@
             "components": [
                 {
                     "type": "class",
-                    "classname": "hello.AppSession",
-                    "realm": "realm1",
+                    "classname": "socketserver.SocketServer",
+                    "realm": "default",
                     "transport": {
                         "type": "websocket",
                         "endpoint": {
                             "type": "tcp",
                             "host": "127.0.0.1",
-                            "port": 8080
+                            "port": 8080,
+                            "tls": {
+                            }
                         },
-                        "url": "ws://127.0.0.1:8080/ws"
+                        "url": "wss://127.0.0.1:8080/ws"
                     }
                 }
             ]
