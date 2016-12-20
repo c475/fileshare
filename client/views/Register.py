@@ -7,7 +7,7 @@ from django.contrib.auth import (
 )
 
 
-class Register(NotLoggedInMixin, CreateView):
+class Register(NotLoggedInRequired, CreateView):
     model = User
     template_name = 'registration/register.html'
     success_url = '/'
