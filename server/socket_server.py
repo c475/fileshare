@@ -27,7 +27,7 @@ from autobahn.twisted.websocket import (
 class Socks(WebSocketServerProtocol):
 
 	def onConnect(self, request):
-		print("Client connected: " + str(request.__dict__))
+		print("Client connected: " + str(request))
 
 	def onOpen(self):
 		print("Socket connection open")
