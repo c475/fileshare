@@ -25,7 +25,7 @@ SECRET_KEY = '0bg&8+ojpc*p(37=a)#0hx8)fuvet-)1tx%c5z1%b#7gq_u@n#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ['127.0.0.1', 'ytdjb.com']
 
 AUTH_USER_MODEL = "client.User"
 
