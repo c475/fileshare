@@ -33,7 +33,7 @@ if __name__ == '__main__':
 	from twisted.python import log
 	from twisted.internet import reactor
 
-	logging.startLogging(sys.stdout)
+	log.startLogging(sys.stdout)
 
 	factory = WebSocketServerFactory('ws://127/0/0/1:9000')
 	factory.protocol = Socks
