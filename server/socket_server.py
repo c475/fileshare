@@ -60,8 +60,8 @@ if __name__ == '__main__':
 	
 	factory.setProtocolOptions(
 		allowedOrigins=[
-			'https://127.0.0.1',
-			'https://ytdjb.com'
+			'127.0.0.1',
+			'ytdjb.com'
 		]
 	)
 
