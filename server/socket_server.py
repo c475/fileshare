@@ -1,3 +1,4 @@
+import os
 import sys
 
 sys.path.append('/srv/')
@@ -67,5 +68,8 @@ if __name__ == '__main__':
 	factory.protocol = Socks
 
 	reactor.listenSSL(8080, factory, contextFactory)
+
+	# switch back to www-data after opening certs
+	os.setuid(33)
 
 	reactor.run()
