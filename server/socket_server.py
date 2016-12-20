@@ -57,6 +57,7 @@ if __name__ == '__main__':
 
 	factory = WebSocketServerFactory('ws://127.0.0.1:8080')
 
+	# Stupid bug in autobahn or twisted, this doesn't work
 	# factory.setProtocolOptions(
 	# 	allowedOrigins=[
 	# 		'https://ytdjb.com'
