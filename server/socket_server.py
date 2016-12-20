@@ -28,6 +28,7 @@ class Socks(WebSocketServerProtocol):
 
 	def onConnect(self, request):
 		print("Client connected: " + str(request))
+		print(self.__dict__)
 
 	def onOpen(self):
 		print("Socket connection open")
