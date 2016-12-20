@@ -1,5 +1,6 @@
 from client.models import User
 from client.forms import UserCreationForm
+from client.mixins import NotLoggedInRequired
 from django.contrib.auth import (
     login,
     authenticate
