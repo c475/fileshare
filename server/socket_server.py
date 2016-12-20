@@ -12,15 +12,12 @@ settings.configure()
 setup()
 
 from twisted.python import log
-from twisted.internet import (
-	reactor,
-	ssl
-)
-
+from twisted.internet import ssl
 
 from autobahn.twisted.websocket import (
 	WebSocketServerProtocol,
-	WebSocketServerFactory
+	WebSocketServerFactory,
+	listenWS
 )
 
 
@@ -66,5 +63,4 @@ if __name__ == '__main__':
 
 	factory.protocol = Socks
 
-	reactor.listenTCP(8080, factory, contextFactory)
-	reactor.run()
+	listenWS(factory, contextFactory)
