@@ -66,5 +66,5 @@ if __name__ == '__main__':
 
 	factory.protocol = Socks
 
-	reactor.listen(8080, factory)
+	reactor.listenTCP(8080, factory, contextFactory)
 	reactor.run()
