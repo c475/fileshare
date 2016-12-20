@@ -59,12 +59,7 @@ if __name__ == '__main__':
 
 	factory.setProtocolOptions(
 		allowedOrigins=[
-			u'https://127.0.0.1:8080',
-			u'https://localhost:8080',
-			u'https://ytdjb.com:8080',
-			u'https://ytdjb.com',
-			u'https://www.ytdjb.com',
-			u'ytdjb.com'
+			'https://ytdjb.com'
 		]
 	)
 
