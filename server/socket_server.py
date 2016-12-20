@@ -57,11 +57,11 @@ if __name__ == '__main__':
 
 	factory = WebSocketServerFactory('ws://127.0.0.1:8080')
 
-	factory.setProtocolOptions(
-		allowedOrigins=[
-			'https://ytdjb.com'
-		]
-	)
+	# factory.setProtocolOptions(
+	# 	allowedOrigins=[
+	# 		'https://ytdjb.com'
+	# 	]
+	# )
 
 	factory.protocol = Socks
 
