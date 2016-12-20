@@ -4,6 +4,6 @@ from django.contrib.auth.decorators import login_required
 
 # @login_required
 def Index(request):
-	render(request, "index.html", context={
+	return render(request, "index.html", context={
 		'user': request.user
 	})
