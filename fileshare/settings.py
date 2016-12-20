@@ -63,7 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'fileshare.middleware.VariousHeaders'
+    'fileshare.custom_middleware.custom'
 ]
 
 ROOT_URLCONF = 'fileshare.urls'
