@@ -5,8 +5,10 @@ sys.path.append('/srv/server/')
 sys.path.append('/srv/fileshare/')
 sys.path.append('/srv/client/')
 
+from django.conf import settings
 from django import setup
 
+settings.setup()
 setup()
 
 from autobahn.twisted.websocket import (
