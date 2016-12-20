@@ -8,7 +8,7 @@ sys.path.append('/srv/client/')
 from django.conf import settings
 from django import setup
 
-settings.setup()
+settings.configure()
 setup()
 
 from autobahn.twisted.websocket import (
