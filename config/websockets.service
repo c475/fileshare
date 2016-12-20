@@ -6,8 +6,6 @@ After=network.target
 Type=simple
 WorkingDirectory=/srv/server/
 ExecStart=/usr/bin/python socket_server.py
-User=nobody
-Group=nobody
 
 [Install]
 WantedBy=multi-user.target
