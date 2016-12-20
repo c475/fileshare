@@ -5,7 +5,7 @@ sys.path.append('/srv/server/')
 sys.path.append('/srv/fileshare/')
 sys.path.append('/srv/client/')
 
-from django.conf import setup
+from django import setup
 
 setup()
 
