@@ -11,6 +11,13 @@ from django import setup
 settings.configure()
 setup()
 
+from twisted.python import log
+from twisted.internet import (
+	reactor,
+	ssl
+)
+
+
 from autobahn.twisted.websocket import (
 	WebSocketServerProtocol,
 	WebSocketServerFactory
@@ -41,15 +48,23 @@ class Socks(WebSocketServerProtocol):
 
 if __name__ == '__main__':
 
-	import sys
-
-	from twisted.python import log
-	from twisted.internet import reactor
-
 	log.startLogging(sys.stdout)
 
+	contextFactory = ssl.DefaultOpenSSLContextFactory(
+		'/etc/ssl/private/mediacenter.key',
+		'/etc/ssl/certs/ytdjb.com'
+	)
+
 	factory = WebSocketServerFactory('ws://127.0.0.1:8080')
+	
+	factory.setProtocolOptions(
+		allowedOrigins=[
+			'https://127.0.0.1',
+			'https://ytdjb.com'
+		]
+	)
+
 	factory.protocol = Socks
 
-	reactor.listenTCP(8080, factory)
+	reactor.listen(8080, factory)
 	reactor.run()
