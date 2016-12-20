@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^index/', Index),
     url(r'^register/', Register.as_view()),
     url(r'^logout/$', logout, {'next_page': '/'}),
-    url(r'^login/$', Login.custom_login),
+    url(r'^login/$', custom_login),
 ]
