@@ -1,3 +1,14 @@
+import sys
+
+sys.path.append('/srv/')
+sys.path.append('/srv/server/')
+sys.path.append('/srv/fileshare/')
+sys.path.append('/srv/client/')
+
+from django.conf import setup
+
+setup()
+
 from autobahn.twisted.websocket import (
 	WebSocketServerProtocol,
 	WebSocketServerFactory
@@ -35,7 +46,7 @@ if __name__ == '__main__':
 
 	log.startLogging(sys.stdout)
 
-	factory = WebSocketServerFactory('ws://127/0/0/1:9000')
+	factory = WebSocketServerFactory('ws://127.0.0.1:8080')
 	factory.protocol = Socks
 
 	reactor.listenTCP(8080, factory)
