@@ -61,7 +61,10 @@ if __name__ == '__main__':
 		allowedOrigins=[
 			'https://127.0.0.1:8080',
 			'https://localhost:8080',
-			'https://ytdjb.com:8080'
+			'https://ytdjb.com:8080',
+			'https://ytdjb.com',
+			'https://www.ytdjb.com',
+			'ytdjb.com'
 		]
 	)
 
