@@ -21,5 +21,19 @@ git clone https://github.com/c475/fileshare.git /srv/
 
 pip install -r /srv/requirements.txt
 
-cp /srv/config/crossbar.service /etc/systemd/system
-cp /srv/config/gunicorn.service /etc/systemd/system
+mkdir /var/log/gunicorn
+
+#### SET UP CERTS BEFORE CROSSING THIS LINE ####
+
+rm -f /etc/nginx/sites-enabled/default
+rm -f /etc/nginx/sites-available/default
+cp /srv/config/ytdjb.conf /etc/nginx/sites-enabled
+systemctl enable nginx.service
+systemctl restart nginx.service
+
+sudo cp /srv/config/websockets.service /etc/systemd/system
+sudo cp /srv/config/gunicorn.service /etc/systemd/system
+sudo systemctl enable websockets.service
+sudo systemctl enable gunicorn.service
+sudo systemctl restart websockets.service
+sudo systemctl restart gunicorn.service
