@@ -31,42 +31,39 @@
 
 <script type="text/javascript">
 
-window.onload = function() {
+var Socket = {
 
-    var Socket = {
+    ini: false,
+    connection: null,
 
-        ini: false,
-        connection: null,
+    initialize: function () {
+        var self = this;
 
-        initialize: function () {
-            var self = this;
+        this.connection = new ReconnectingWebSocket('wss://' + document.location.host + ':8080');
 
-            this.connection = new ReconnectingWebSocket('wss://' + document.location.host + ':8080');
+        this.connection.onopen = function () {
+            self.ini = true;
+        };
 
-            this.connection.onopen = function () {
-                self.ini = true;
-            };
+        this.connection.onmessage = function (event) {
+            console.log(event);
+        };
+    },
 
-            this.connection.onmessage = function (event) {
-                console.log(event);
-            };
-        },
+    send: function (data) {
+        if (this.ini) {
+            this.connection.send(JSON.stringify(data));
+        }
+    },
 
-        send: function (data) {
-            if (this.ini) {
-                this.connection.send(JSON.stringify(data));
-            }
-        },
-
-        subscribe: function (what, data) {
-            if (this.ini) {
-                data.sub = what;
-                this.connection.send(JSON.stringify(data));
-            }
+    subscribe: function (what, data) {
+        if (this.ini) {
+            data.sub = what;
+            this.connection.send(JSON.stringify(data));
         }
     }
+}
 
-    Socket.initialize();
-};
+Socket.initialize();
 
 </script>
