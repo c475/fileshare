@@ -27,106 +27,46 @@
 <script src="{% static 'js/autobahn.js' %}"></script>
 <script src="{% static 'js/ractive.js' %}"></script>
 <script src="{% static 'js/adapter.js' %}"></script>
+<script src="{% static 'js/reconnecting_websocket.js' %}"></script>
 
 <script type="text/javascript">
 
 window.onload = function() {
 
-    var Crossbar = {
+    var Socket = {
 
+        ini: false,
         connection: null,
-        session: null,
-        socketUpdate: true,
 
-        initialize: function() {
+        initialize: function () {
             var self = this;
 
-            this.connection = new autobahn.Connection({
-                url: 'wss://' + document.location.host + ':8080/ws',
-                realm: 'realm1',
-                // authmethods: ['wampcra'],
-                // authid: '{{ user.pk }}',
-                // onchallenge: function(session, method, extra) {
-                //     return autobahn.auth_cra.sign('{{ key }}', extra.challenge);
-                // }
-            });
+            this.connection = new ReconnectingWebSocket('wss://' + document.location.host + ':8080');
 
-            this.connection.onopen = function(session, details) {
-                self.session = session;
-
+            this.connection.onopen = function () {
+                self.ini = true;
             };
 
-            this.connection.onclose = function(reason, details) {
-                console.info("CONNECTION CLOSED: ", reason, details);
+            this.connection.onmessage = function (event) {
+                console.log(event);
             };
-
-            this.connection.open();
         },
 
-        rpc: function (endpoint, args, callback) {
-            if (this.session) {
-
-                success = function (response) {
-                    if (callback) {
-                        callback(response);
-                    }
-                };
-
-                error = function (error) {
-                    console.info(endpoint + " error: ", error);
-                };
-
-                // if (typeof args === 'undefined' || args === null) {
-                //     args = {room: State.room};
-                // } else if (typeof args === 'object') {
-                //     args.room = State.room;
-                // }
-
-                args = { socket: this.session._id };
-
-                this.session.call(endpoint, [args]).then(success, error);
-
-            } else {
-                console.info("Attempted RPC call with no session.");
+        send: function (data) {
+            if (this.ini) {
+                this.connection.send(JSON.stringify(data));
             }
         },
 
-        subscribe: function (endpoint, callback) {
-            if (this.session) {
-
-                success = function (subscription) {
-                    console.info("subscribed to " + endpoint + ": ", subscription);
-                };
-
-                error = function (error) {
-                    cosole.info("error subscribing to " + endpoint + ": " + error);
-                };
-
-                // this.session.subscribe(State.room + '.' + endpoint, callback).then(success, error);
+        subscribe: function (what, data) {
+            if (this.ini) {
+                data.sub = what;
+                this.connection.send(JSON.stringify(data));
             }
-        },
-
-        register: function (endpoint, procedure) {
-            if (this.session) {
-
-                success = function (registered) {
-                    console.info("procedure registered", registered);
-                };
-
-                error = function (error) {
-                    console.info("failed to register procedure", error);
-                };
-
-                this.session.register(endpoint, procedure).then(success, error);
-            }
-        },
-
-        publish: function (endpoint, args) {
-            this.session.publish(endpoint, args);
         }
-    };
+    }
 
-    Crossbar.initialize();
+    Socket.initialize();
 };
 
 </script>
