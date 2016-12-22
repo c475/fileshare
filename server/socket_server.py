@@ -1,5 +1,6 @@
 import os
 import sys
+from pprint import pprint
 
 sys.path.append('/srv/')
 sys.path.append('/srv/server/')
@@ -27,8 +28,8 @@ from autobahn.twisted.websocket import (
 class Socks(WebSocketServerProtocol):
 
 	def onConnect(self, request):
-		print("Client connected: " + str(request))
-		print(self.__dict__)
+		print("Client connected: " + pprint(request))
+		print(pprint(self.__dict__))
 
 	def onOpen(self):
 		print("Socket connection open")

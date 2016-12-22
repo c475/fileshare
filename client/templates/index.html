@@ -31,6 +31,9 @@
 
 <script type="text/javascript">
 
+var noop = function () { return ; };
+
+
 var Socket = {
 
     ini: false,
@@ -47,12 +50,33 @@ var Socket = {
 
         this.connection.onmessage = function (event) {
             console.log(event);
+
+            switch (event.type) {
+
+                case 'rtc':
+
+                    if (event.subtype === 'gotOffer') {
+                        WebTRC.addPeer(event.offer);
+                    } else if (event.subtype == 'gotAnswer') {
+
+                    }
+
+                    break;
+
+                case 'chat':
+                    break;
+
+                default:
+                    break;
+            }
+
         };
     },
 
-    send: function (data) {
+    rpc: function (method, data) {
         if (this.ini) {
-            this.connection.send(JSON.stringify(data));
+            data.method = method;
+            this.connection.rpc(JSON.stringify(data));
         }
     },
 
@@ -62,7 +86,45 @@ var Socket = {
             this.connection.send(JSON.stringify(data));
         }
     }
-}
+};
+
+
+// var WebRTC = {
+
+//     config: {
+//         iceServers: [{
+//             urls: 'stun:'
+//         }]
+//     },
+
+//     connections: [],
+
+//     sendChannel: null,
+
+//     peers: [],
+
+//     addPeer: function (offer) {
+
+//     },
+
+//     initialize: function () {
+//         var self = this;
+
+//         this.connection = new RTCPeerConnection(this.config);
+
+//         this.sendChannel = this.connection.createDataChannel('sendDataChannel', {
+//             reliable: false
+//         });
+
+//         // got info about media capabilities of this device
+//         // want to send it to the signalling server
+//         var gotLocalDescription = function (desc) {
+//             self.connection.setLocalDescription(desc);
+//             // signal other peers
+//             Socket.rpc('offer', desc);
+//         };
+//     }
+// }
 
 Socket.initialize();
 
