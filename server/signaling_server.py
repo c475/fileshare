@@ -82,7 +82,6 @@ class Sock(WebSocketServerProtocol):
 
 	def __init__(self, *args, **kwargs):
 		WebSocketServerProtocol.__init__(self, *args, **kwargs)
-		self.peerManager = self.transport.factory.wrappedFactory.peers
 
 	def onConnect(self, request):
 		print("Client connected: " + str(request))
@@ -90,6 +89,7 @@ class Sock(WebSocketServerProtocol):
 
 	def onOpen(self):
 		print("Socket connection open")
+		self.peerManager = self.transport.factory.wrappedFactory.peers
 
 		self.sid = uuid.uuid4().hex
 
