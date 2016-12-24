@@ -177,7 +177,7 @@ var RTC = {
 
         var peer = this.peers[info.from];
 
-        peer.onicecandidate = function (ice) {
+        peer.connection.onicecandidate = function (ice) {
             if (ice.candidate) {
                 SignalServer.send('ice', {
                     to: info.from,
@@ -216,10 +216,12 @@ var RTC = {
     },
 
     gotAnswer: function (info) {
+        console.info("GOT ANSWER", info);
         this.peers[info.from].connection.setRemoteDescription(info.answer);
     },
 
     gotIce: function (info) {
+        console.info("GOT ICE", info);
         var candidate = new RTCIceCandidate(info.ice);
         this.peers[info.from].connection.addIceCandidate(candidate);
     },
