@@ -120,21 +120,21 @@ class Sock(WebSocketServerProtocol):
 					'type': 'offer',
 					'offer': payload['offer'],
 					'from': self.sid
-				}, method['to'])
+				}, payload['to'])
 
 			elif method == 'answer':
 				self.peerManager.push({
 					'type': 'answer',
 					'answer': payload['answer'],
 					'from': self.sid
-				}, method['to'])
+				}, payload['to'])
 
 			elif method == 'ice':
 				self.peerManager.push({
 					'type': 'ice',
 					'ice': payload['ice'],
 					'from': self.sid
-				}, method['to'])
+				}, payload['to'])
 
 			elif method == 'getPeers':
 				ret = {
