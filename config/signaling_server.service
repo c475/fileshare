@@ -1,11 +1,11 @@
 [Unit]
-Description=websockets
+Description=WebRTC signaling server
 After=network.target
 
 [Service]
 Type=simple
 WorkingDirectory=/srv/server/
-ExecStart=/usr/bin/python socket_server.py
+ExecStart=/usr/bin/python signaling_server.py
 
 [Install]
 WantedBy=multi-user.target

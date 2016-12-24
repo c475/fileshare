@@ -31,10 +31,10 @@
 
 <script type="text/javascript">
 
-var noop = function () { return ; };
+var noop = function () { console.info("SOME ERROR"); };
 
 
-var Socket = {
+var SignalServer = {
 
     ini: false,
     connection: null,
@@ -46,6 +46,7 @@ var Socket = {
 
         this.connection.onopen = function () {
             self.ini = true;
+            console.log("Connection to signal server open");
         };
 
         this.connection.onmessage = function (event) {
@@ -53,79 +54,178 @@ var Socket = {
 
             switch (event.type) {
 
-                case 'rtc':
-
-                    if (event.subtype === 'gotOffer') {
-                        WebTRC.addPeer(event.offer);
-                    } else if (event.subtype == 'gotAnswer') {
-
-                    }
-
+                // got an offer from a remote peer
+                case 'offer':
+                    RTC.gotOffer(event);
                     break;
 
-                case 'chat':
+                // an answer from a remote client
+                case 'answer':
+                    RTC.gotAnswer(event);
+                    break;
+
+                // add remote ICE candidate
+                case 'ice':
+                    RCT.gotIce(event);
+                    break;
+
+                // get a list of peers to negotiate a connection with
+                case 'peers':
+                    RTC.negotiate(event.peers);
                     break;
 
                 default:
+                    console.info("unhandled message", event);
                     break;
             }
 
         };
     },
 
-    rpc: function (method, data) {
+    send: function (method, data) {
         if (this.ini) {
+            if (!data) {
+                data = {};
+            }
             data.method = method;
-            this.connection.rpc(JSON.stringify(data));
+            this.connection.send(JSON.stringify(data));
         }
     },
 
-    subscribe: function (what, data) {
+    subscribe: function (to, bool) {
         if (this.ini) {
-            data.sub = what;
-            this.connection.send(JSON.stringify(data));
+            this.connection.send(JSON.stringify({
+                to: to,
+                bool: bool
+            }));
         }
     }
 };
 
 
-// var WebRTC = {
+var RTC = {
 
-//     config: {
-//         iceServers: [{
-//             urls: 'stun:'
-//         }]
-//     },
+    config: {
+        iceServers: [{
+            urls: 'stun:stun.l.google.com:19302'
+        }]
+    },
 
-//     connections: [],
+    peers: {},
 
-//     sendChannel: null,
+    negotiate: function (peerList) {
+        // create an offer and retrieve ICE info, and send them to all currently connected peers
+        for (var i = 0; i < peerList.length; i++) {
+            var pid = peerList[i];
+            var newPeer = {
+                connection: new RTCPeerConnection(this.config),
+            }
 
-//     peers: [],
+            newPeer.channel = newPeer.connection.createDataChannel('dataChannel', {
+                reliable: false
+            });
 
-//     addPeer: function (offer) {
+            newPeer.channel.onopen = function (event) {
+                console.info("Local data channel to " + pid + " has been opened");
 
-//     },
+                setInterval(function () {
+                    newPeer.channel.send("test");
+                }, 1000);
+            };
 
-//     initialize: function () {
-//         var self = this;
+            newPeer.channel.onmessage = function (message) {
+                console.info("Got message from " + pid + ": " + message);
+            };
 
-//         this.connection = new RTCPeerConnection(this.config);
+            newPeer.channel.onclose = function (event) {
+                console.info("Data channel to " + pid + " has been closed");
+            };
 
-//         this.sendChannel = this.connection.createDataChannel('sendDataChannel', {
-//             reliable: false
-//         });
+            newPeer.connection.createOffer(function (offer) {
+                newPeer.connection.setLocalDescription(offer);
+                SignalServer.send('offer', {
+                    to: pid,
+                    offer: offer
+                });
+            }, function (error) {
+                console.info('Error creating offer: ' + error);
+            });
 
-//         // got info about media capabilities of this device
-//         // want to send it to the signalling server
-//         var gotLocalDescription = function (desc) {
-//             self.connection.setLocalDescription(desc);
-//             // signal other peers
-//             Socket.rpc('offer', desc);
-//         };
-//     }
-// }
+            // Answerer is supposed so send ICE i guess
+            // newPeer.connection.onicecandidate = function (ice) {
+            //     if (ice.candidate) {
+            //         SignalServer.send('ice', {
+            //             to: pid,
+            //             ice: ice.candidate
+            //         });
+            //     }
+            // };
 
-Socket.initialize();
+            this.peers[pid] = newPeer;
+        }
+    },
+
+    gotOffer: function (info) {
+        if (!this.peers[info.from]) {
+            var newPeer = {
+                connection: new RTCPeerConnection(this.config)
+            };
+
+            this.peers[info.from] = newPeer;
+        }
+
+        var peer = this.peers[info.from];
+
+        peer.onicecandidate = function (ice) {
+            if (ice.candidate) {
+                SignalServer.send('ice', {
+                    to: info.from,
+                    ice: ice.candidate
+                });
+            }
+        };
+
+        peer.connection.ondatachannel = function (event) {
+            peer.channel = event.channel;
+            peer.channel.onmessage = function (message) {
+                console.info("Got message from " + info.from + ": " + message);
+            }
+            peer.channel.onopen = function (event) {
+                console.info("Data channel opened: " + event);
+                setInterval(function () {
+                    peer.channel.send("test");
+                }, 1000);
+            }
+            peer.channel.onclose = function (event) {
+                console.info("Data channel closed: " + event);
+            }
+        }
+
+        peer.connection.setRemoteDescription(info.offer);
+
+        peer.connection.createAnswer(function (answer) {
+            peer.connection.setLocalDescription(answer);
+            SignalServer.send('answer', {
+                to: info.from,
+                answer: answer
+            });
+        });
+    },
+
+    gotAnswer: function (info) {
+        this.peers[info.from].connection.setRemoteDescription(info.answer);
+    },
+
+    gotIce: function (info) {
+        var candidate = new RTCIceCandidate(info.ice);
+        this.peers[info.from].connection.addIceCandidate(candidate);
+    },
+
+    initialize: function () {
+        SignalServer.send('getPeers');
+    }
+}
+
+SignalServer.initialize();
 
 </script>
