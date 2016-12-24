@@ -118,16 +118,15 @@ var RTC = {
     negotiate: function (peerList) {
         // create an offer and retrieve ICE info, and send them to all currently connected peers
         var funcs = [];
-
         var self = this;
 
         for (var i = 0; i < peerList.length; i++) {
-            var n = function () {
-                var pid = peerList[i];
-                var newPeer = {
-                    connection: new RTCPeerConnection(self.config),
-                }
+            var pid = peerList[i];
+            var newPeer = {
+                connection: new RTCPeerConnection(self.config),
+            }
 
+            var n = function () {
                 newPeer.channel = newPeer.connection.createDataChannel('dataChannel', {
                     reliable: false
                 });
