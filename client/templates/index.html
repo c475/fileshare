@@ -147,6 +147,8 @@ var RTC = {
                     console.info("Data channel to " + pid + " has been closed");
                 };
 
+                console.info("SENDING TO: " + pid);
+
                 newPeer.connection.createOffer().then(function (offer) {
                     newPeer.connection.setLocalDescription(offer);
                     SignalServer.send('offer', {
