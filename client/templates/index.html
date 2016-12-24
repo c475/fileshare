@@ -47,6 +47,7 @@ var SignalServer = {
         this.connection.onopen = function () {
             self.ini = true;
             console.log("Connection to signal server open");
+            RTC.initialize();
         };
 
         this.connection.onmessage = function (event) {
@@ -142,14 +143,12 @@ var RTC = {
                 console.info("Data channel to " + pid + " has been closed");
             };
 
-            newPeer.connection.createOffer(function (offer) {
+            newPeer.connection.createOffer().then(function (offer) {
                 newPeer.connection.setLocalDescription(offer);
                 SignalServer.send('offer', {
                     to: pid,
                     offer: offer
                 });
-            }, function (error) {
-                console.info('Error creating offer: ' + error);
             });
 
             // Answerer is supposed so send ICE i guess
@@ -206,7 +205,7 @@ var RTC = {
 
         peer.connection.setRemoteDescription(info.offer);
 
-        peer.connection.createAnswer(function (answer) {
+        peer.connection.createAnswer().then(function (answer) {
             console.info("CREATED ANSWER", answer);
             peer.connection.setLocalDescription(answer);
             SignalServer.send('answer', {
@@ -231,6 +230,5 @@ var RTC = {
 }
 
 SignalServer.initialize();
-RTC.initialize()
 
 </script>
