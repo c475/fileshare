@@ -117,51 +117,53 @@ var RTC = {
 
     negotiate: function (peerList) {
         // create an offer and retrieve ICE info, and send them to all currently connected peers
+        var funcs = [];
+
+        var self = this;
+
         for (var i = 0; i < peerList.length; i++) {
-            var pid = peerList[i];
-            var newPeer = {
-                connection: new RTCPeerConnection(this.config),
-            }
+            var n = function () {
+                var pid = peerList[i];
+                var newPeer = {
+                    connection: new RTCPeerConnection(self.config),
+                }
 
-            newPeer.channel = newPeer.connection.createDataChannel('dataChannel', {
-                reliable: false
-            });
-
-            newPeer.channel.onopen = function (event) {
-                console.info("Local data channel to " + pid + " has been opened");
-
-                setInterval(function () {
-                    newPeer.channel.send("test");
-                }, 1000);
-            };
-
-            newPeer.channel.onmessage = function (message) {
-                console.info("Got message from " + pid + ": " + message);
-            };
-
-            newPeer.channel.onclose = function (event) {
-                console.info("Data channel to " + pid + " has been closed");
-            };
-
-            newPeer.connection.createOffer().then(function (offer) {
-                newPeer.connection.setLocalDescription(offer);
-                SignalServer.send('offer', {
-                    to: pid,
-                    offer: offer
+                newPeer.channel = newPeer.connection.createDataChannel('dataChannel', {
+                    reliable: false
                 });
-            });
 
-            // Answerer is supposed so send ICE i guess
-            // newPeer.connection.onicecandidate = function (ice) {
-            //     if (ice.candidate) {
-            //         SignalServer.send('ice', {
-            //             to: pid,
-            //             ice: ice.candidate
-            //         });
-            //     }
-            // };
+                newPeer.channel.onopen = function (event) {
+                    console.info("Local data channel to " + pid + " has been opened");
 
-            this.peers[pid] = newPeer;
+                    setInterval(function () {
+                        newPeer.channel.send("test");
+                    }, 1000);
+                };
+
+                newPeer.channel.onmessage = function (message) {
+                    console.info("Got message from " + pid + ": " + message);
+                };
+
+                newPeer.channel.onclose = function (event) {
+                    console.info("Data channel to " + pid + " has been closed");
+                };
+
+                newPeer.connection.createOffer().then(function (offer) {
+                    newPeer.connection.setLocalDescription(offer);
+                    SignalServer.send('offer', {
+                        to: pid,
+                        offer: offer
+                    });
+                });
+
+                self.peers[pid] = newPeer;
+            };
+
+            funcs.push(n);
+        }
+
+        for (var f in funcs) {
+            funcs[f]();
         }
     },
 
