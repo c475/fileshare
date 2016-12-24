@@ -120,15 +120,13 @@ var RTC = {
         var funcs = [];
         var self = this;
 
-        console.log("PEERLIST!!!!!", peerList);
-
         for (var i = 0; i < peerList.length; i++) {
-            var pid = peerList[i];
-            var newPeer = {
-                connection: new RTCPeerConnection(self.config),
-            }
 
-            var n = function () {
+            var n = function (pid) {
+                var newPeer = {
+                    connection: new RTCPeerConnection(self.config),
+                };
+
                 newPeer.channel = newPeer.connection.createDataChannel('dataChannel', {
                     reliable: false
                 });
@@ -165,8 +163,8 @@ var RTC = {
             funcs.push(n);
         }
 
-        for (var f in funcs) {
-            funcs[f]();
+        for (var i = 0; i < peerList.length; i++) {
+            funcs[f](peerList[i]);
         }
     },
 
