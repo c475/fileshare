@@ -81,7 +81,7 @@ class SocketServerFactory(WebSocketServerFactory):
 class Sock(WebSocketServerProtocol):
 
 	def __init__(self, *args, **kwargs):
-		WebSocketServerProtocol.__init__(*args, **kwargs)
+		WebSocketServerProtocol.__init__(self, *args, **kwargs)
 		self.peerManager = self.transport.factory.wrappedFactory.peers
 
 	def onConnect(self, request):
