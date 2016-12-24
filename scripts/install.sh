@@ -31,9 +31,9 @@ cp /srv/config/ytdjb.conf /etc/nginx/sites-enabled
 systemctl enable nginx.service
 systemctl restart nginx.service
 
-sudo cp /srv/config/websockets.service /etc/systemd/system
+sudo cp /srv/config/signaling_server.service /etc/systemd/system
 sudo cp /srv/config/gunicorn.service /etc/systemd/system
-sudo systemctl enable websockets.service
+sudo systemctl enable signaling_server.service
 sudo systemctl enable gunicorn.service
-sudo systemctl restart websockets.service
+sudo systemctl restart signaling_server.service
 sudo systemctl restart gunicorn.service
