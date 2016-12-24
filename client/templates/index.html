@@ -167,6 +167,7 @@ var RTC = {
     },
 
     gotOffer: function (info) {
+        console.info("GOT OFFER: ", info);
         if (!this.peers[info.from]) {
             var newPeer = {
                 connection: new RTCPeerConnection(this.config)
@@ -187,24 +188,26 @@ var RTC = {
         };
 
         peer.connection.ondatachannel = function (event) {
+            console.info("OPENED UP DATA CHANNEL (ANSWERER)");
             peer.channel = event.channel;
             peer.channel.onmessage = function (message) {
                 console.info("Got message from " + info.from + ": " + message);
-            }
+            };
             peer.channel.onopen = function (event) {
                 console.info("Data channel opened: " + event);
                 setInterval(function () {
                     peer.channel.send("test");
                 }, 1000);
-            }
+            };
             peer.channel.onclose = function (event) {
                 console.info("Data channel closed: " + event);
-            }
+            };
         }
 
         peer.connection.setRemoteDescription(info.offer);
 
         peer.connection.createAnswer(function (answer) {
+            console.info("CREATED ANSWER", answer);
             peer.connection.setLocalDescription(answer);
             SignalServer.send('answer', {
                 to: info.from,
