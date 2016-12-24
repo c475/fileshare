@@ -139,7 +139,7 @@ class Sock(WebSocketServerProtocol):
 			elif method == 'getPeers':
 				ret = {
 					'type': 'peers',
-					'peers': self.peerManager.getPeers()
+					'peers': self.peerManager.getPeers(who=self.sid)
 				}
 				self.sendMessage(json.dumps(ret))
 

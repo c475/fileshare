@@ -50,28 +50,29 @@ var SignalServer = {
         };
 
         this.connection.onmessage = function (event) {
-            console.log(event);
 
-            switch (event.type) {
+            var data = JSON.parse(event.data);
+
+            switch (data.type) {
 
                 // got an offer from a remote peer
                 case 'offer':
-                    RTC.gotOffer(event);
+                    RTC.gotOffer(data);
                     break;
 
                 // an answer from a remote client
                 case 'answer':
-                    RTC.gotAnswer(event);
+                    RTC.gotAnswer(data);
                     break;
 
                 // add remote ICE candidate
                 case 'ice':
-                    RCT.gotIce(event);
+                    RCT.gotIce(data);
                     break;
 
                 // get a list of peers to negotiate a connection with
                 case 'peers':
-                    RTC.negotiate(event.peers);
+                    RTC.negotiate(data.peers);
                     break;
 
                 default:
