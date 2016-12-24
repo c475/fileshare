@@ -71,7 +71,7 @@ class SocketServerFactory(WebSocketServerFactory):
         self.peers = Peers()
 
         if DEBUG is True:
-        	l = task.loopingCall(self.printConnectedPeers)
+        	l = task.LoopingCall(self.printConnectedPeers)
         	l.start(2)
 
     def printConnectedPeers(self):
