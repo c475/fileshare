@@ -5,8 +5,8 @@ from client.views import *
 
 urlpatterns = [
     url(r'^$', Index),
-    url(r'^index/$', Index),
-    url(r'^register/$', Register.as_view()),
-    url(r'^logout/$', logout, {'next_page': '/'}),
-    url(r'^login/$', custom_login),
+    url(r'^index/$', Index, name='index'),
+    url(r'^register/$', Register.as_view(), name='register'),
+    url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
+    url(r'^login/$', custom_login, name='login'),
 ]
