@@ -3,3 +3,4 @@ autobahn-python
 django-redis-sessions
 gunicorn
 futures
+bcrypt
