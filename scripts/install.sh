@@ -37,3 +37,7 @@ sudo systemctl enable signaling_server.service
 sudo systemctl enable gunicorn.service
 sudo systemctl restart signaling_server.service
 sudo systemctl restart gunicorn.service
+
+sudo python /srv/manage.py collectstatic --noinput
+sudo python /srv/manage.py makemigrations
+sudo python /srv/manage.py migrate
