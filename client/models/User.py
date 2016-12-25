@@ -38,8 +38,6 @@ class User(PermissionsMixin, AbstractBaseUser):
 
     email = models.CharField(max_length=100, unique=True, blank=True, default=None, null=True)
 
-    current_room = models.ForeignKey('backend.Room', blank=True, null=True, default=None)
-
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = []
 

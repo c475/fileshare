@@ -9,7 +9,3 @@ def custom_login(request, **kwargs):
         return HttpResponseRedirect("/")
     else:
         return login(request, **kwargs)
-
-
-class Login(NotLoggedInRequired, TemplateView):
-    template_name = 'login.html'
