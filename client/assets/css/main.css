@@ -24,13 +24,13 @@ body {
     font-weight: normal;
     overflow-x: hidden;
     overflow-y: auto;
-	background: #333;
+    background: #333;
 }
 .wrapper {
     min-height: 100%;
     position: static;
     overflow: hidden;
-	
+    
 }
 .wrapper:before,
 .wrapper:after {
@@ -97,10 +97,10 @@ body {
 background: transparent;
     padding:0px 0px 15px 0px;
     color: #444;
-	margin-top:0px;
-	text-align:center;
-	font-size:12px;
-	color:#999
+    margin-top:0px;
+    text-align:center;
+    font-size:12px;
+    color:#999
     /* border-top: 1px solid #d2d6de; */
 }
 .fixed .main-header,
@@ -192,8 +192,8 @@ a:focus {
     min-height: 70px;
 
     border-radius: 0;
-	background:#fff;
-	box-shadow:2px 2px 2px 0px rgba(5,5,5,0.06)
+    background:#fff;
+    box-shadow:2px 2px 2px 0px rgba(5,5,5,0.06)
 }
 .layout-top-nav .main-header>.navbar {
     margin-left: 0
@@ -220,7 +220,7 @@ a:focus {
 .main-header .navbar-custom-menu,
 .main-header .navbar-right {
     float: right;
-	font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .top-search {width:250px; background:#f8f8f8; margin-top:16px; border-radius:999px; padding:0px 5px; margin-right:25px}
@@ -252,12 +252,12 @@ a:focus {
     background-image: none;
     padding:25px 20px;
     font-family: fontAwesome;
-	line-height:normal
+    line-height:normal
 }
 .main-header .sidebar-toggle:before {
     content: "\f0c9";
-	font-size:16px;
-	color:#2fdab8
+    font-size:16px;
+    color:#2fdab8
 }
 .main-header .sidebar-toggle:hover {
     color: #000
@@ -309,12 +309,12 @@ header .title {
     padding-bottom: 24px;
     color: #ccc;
    }
-	
+    
 .navbar-default .navbar-nav>li>a {
     color: #fff;
-}	
-	
-.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {background:#333; color:#fff; }	
+}    
+    
+.nav .open>a, .nav .open>a:focus, .nav .open>a:hover {background:#333; color:#fff; }    
 
 .nav>li>a .fa-cog { font-size:18px; color:#ccc; vertical-align:middle}
 .nav>li>a:hover .fa-cog { font-size:18px; color:#fff}
@@ -333,12 +333,12 @@ header .title {
     font-family:'Montserrat', sans-serif;
     padding: 0 15px;
     font-weight: 300;
-	background:#2fdab8;
-	position:relative;
-	color:#fff;
-	letter-spacing: 2px;
+    background:#2fdab8;
+    position:relative;
+    color:#fff;
+    letter-spacing: 2px;
     padding-top: 3px;
-	text-transform:uppercase
+    text-transform:uppercase
 }
 .main-header .logo:before {content: "\f0d7"; position:absolute; bottom:-33px; font-family:FontAwesome; color:#2fdab8; font-size:30px}
 
@@ -362,7 +362,7 @@ header .title {
     letter-spacing: 1px;
     padding-left: 0px;
     text-transform: uppercase;
-	font-family:'Montserrat', sans-serif
+    font-family:'Montserrat', sans-serif
 }
 .content-header>h1>small {
     font-size: 15px;
@@ -505,9 +505,9 @@ header .title {
 }
 .sidebar {
     padding-bottom: 0px;
-	background:#2fdab8;
-	box-shadow:0px 3px 8px -4px rgba(0,0,0,0.15);
-	font-family: 'Montserrat', sans-serif;
+    background:#2fdab8;
+    box-shadow:0px 3px 8px -4px rgba(0,0,0,0.15);
+    font-family: 'Montserrat', sans-serif;
 }
 .sidebar-form input:focus {
     border-color: transparent
@@ -517,7 +517,7 @@ header .title {
     width: 100%;
     padding: 25px;
     overflow: hidden;
-	background:#1ab394
+    background:#1ab394
 }
 .user-panel:before,
 .user-panel:after {
@@ -531,7 +531,7 @@ header .title {
     width: 100%;
     max-width: 110px;
     height: auto;
-	border: 6px #fff solid;
+    border: 6px #fff solid;
 }
 .user-panel>.info {
     padding: 5px 5px 5px 15px;
@@ -541,8 +541,8 @@ header .title {
 .user-panel>.info>p {
     font-weight: 600;
     margin-top: 9px;
-	color:#fff;
-	margin-bottom: 6px;
+    color:#fff;
+    margin-bottom: 6px;
 }
 
 .profile-info a {color: #1ab394;font-family:'Montserrat', sans-serif;}
@@ -573,15 +573,15 @@ header .title {
 .sidebar-menu>li>a {
     padding: 16px 20px 16px 30px;
     display: block;
-	color:#fff;
-	font-size:14px;
-	border-bottom:1px rgba(255,255,255,0.2) solid
+    color:#fff;
+    font-size:14px;
+    border-bottom:1px rgba(255,255,255,0.2) solid
 }
 .sidebar-menu>li>a>.fa,
 .sidebar-menu>li>a>.glyphicon,
 .sidebar-menu>li>a>.ion {
     width: 20px;
-	font-size:14px
+    font-size:14px
 }
 .sidebar-menu>li .label,
 .sidebar-menu>li .badge {
@@ -591,7 +591,7 @@ header .title {
 .sidebar-menu li.header {
     padding:25px 30px 5px 30px;
     font-size: 12px;
-	letter-spacing: 1px;
+    letter-spacing: 1px;
 }
 .sidebar-menu li>a>.fa-angle-left {
     width: auto;
@@ -719,7 +719,7 @@ header .title {
 .sidebar-menu>li.header {
     white-space: nowrap;
     overflow: hidden;
-	
+    
 }
 
 .main-sidebar .user-panel {text-align:center}
@@ -1004,7 +1004,7 @@ header .title {
     padding: 10px 15px;
     border-bottom: 1px solid #333;
     font-size: 13px;
-	font-weight:bold
+    font-weight:bold
 }
 .navbar-nav>.notifications-menu>.dropdown-menu>li.footer>a,
 .navbar-nav>.messages-menu>.dropdown-menu>li.footer>a,
@@ -1047,7 +1047,7 @@ header .title {
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a,
 .navbar-nav>.tasks-menu>.dropdown-menu>li .menu>li>a {
     display: block;
-	 line-height:normal
+     line-height:normal
 }
 .navbar-nav>.notifications-menu>.dropdown-menu>li .menu>li>a:hover,
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a:hover,
@@ -1061,7 +1061,7 @@ header .title {
     text-overflow: ellipsis;
     white-space: nowrap;
     padding: 10px 15px;
-	font-size:13px
+    font-size:13px
 }
 .navbar-nav>.notifications-menu>.dropdown-menu>li .menu>li>a>.glyphicon,
 .navbar-nav>.notifications-menu>.dropdown-menu>li .menu>li>a>.fa,
@@ -1095,7 +1095,7 @@ header .title {
     margin: 5px 0 0 50px;
     font-size: 12px;
     color: #888888;
-	font-family:'Open Sans', sans-serif
+    font-family:'Open Sans', sans-serif
 }
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a:before,
 .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a:after {
@@ -1117,7 +1117,7 @@ header .title {
 .navbar-nav>.tasks-menu>.dropdown-menu>li .menu>li>a>.progress {
     padding: 0;
     margin: 0;
-	background:#333
+    background:#333
 }
 .navbar-nav>.user-menu>.dropdown-menu {
     border-top-right-radius: 0;
@@ -1149,7 +1149,7 @@ header .title {
     color: #26d1af;
     font-size: 14px;
     margin-top: 10px;
-	font-weight:bold
+    font-weight:bold
 }
 .navbar-nav>.user-menu>.dropdown-menu>li.user-header>p>small {
     display: block;
@@ -1170,7 +1170,7 @@ header .title {
 }
 .navbar-nav>.user-menu>.dropdown-menu>.user-body a {
     color: #444 !important;
-	font-size:13px
+    font-size:13px
 }
 @media (max-width: 991px) {
     .navbar-nav>.user-menu>.dropdown-menu>.user-body a {
@@ -1269,7 +1269,7 @@ header .title {
     position: absolute;
     right: 0;
     left: auto;
-	font-family:'Open Sans', sans-serif
+    font-family:'Open Sans', sans-serif
 }
 @media (max-width: 991px) {
     .navbar-custom-menu>.navbar-nav {
@@ -1290,8 +1290,8 @@ header .title {
     border-radius: 0;
     box-shadow: none;
     border-color: #222;
-	height:28px;
-	background:#222
+    height:28px;
+    background:#222
 }
 .form-control:focus {
     border-color: #3c8dbc;
@@ -1310,8 +1310,8 @@ header .title {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-	background:#222;
-	border:1px #222 solid
+    background:#222;
+    border:1px #222 solid
 }
 .form-group.has-success label {
     color: #00a65a
@@ -1771,11 +1771,11 @@ textarea {background:#222; border-color:#222}
     font-size: 16px;
     margin: 0;
     line-height: 1;
-	font-family: 'Montserrat', sans-serif;
-	text-transform:uppercase;
-	font-weight:bold;
-	letter-spacing:1px;
-	color:#ccc
+    font-family: 'Montserrat', sans-serif;
+    text-transform:uppercase;
+    font-weight:bold;
+    letter-spacing:1px;
+    color:#ccc
 }
 
 .bg-teal-gradient .box-title {color:#ccc}
@@ -1867,9 +1867,9 @@ textarea {background:#222; border-color:#222}
 
 .main-sidebar .box-comments {
     background: #f7f7f7;
-	padding:20px;
-	line-height:17px
-	
+    padding:20px;
+    line-height:17px
+    
 }
 .main-sidebar .box-footer {padding:20px}
 
@@ -1877,7 +1877,7 @@ textarea {background:#222; border-color:#222}
 
 .box-comments {
     background: #292929;
-	
+    
 }
 .box-comments .box-comment {
     padding: 8px 0;
@@ -1902,7 +1902,7 @@ textarea {background:#222; border-color:#222}
 }
 .box-comments .comment-text {
     margin-left: 40px;
-	line-height:1.5em
+    line-height:1.5em
 }
 .box-comments .username {
     color: #ccc;
@@ -1912,8 +1912,8 @@ textarea {background:#222; border-color:#222}
 .box-comments .text-muted {
     font-weight: 400;
     font-size: 12px;
-	display:block;
-	margin-bottom:5px
+    display:block;
+    margin-bottom:5px
 }
 .todo-list {
     margin: 0;
@@ -1934,7 +1934,7 @@ textarea {background:#222; border-color:#222}
 }
 .todo-list>li>input[type='checkbox'] {
     margin: 0 5px 0 5px;
-	vertical-align:middle
+    vertical-align:middle
 }
 .todo-list>li .text {
     display: inline-block;
@@ -2226,7 +2226,7 @@ textarea {background:#222; border-color:#222}
     -webkit-box-shadow: none;
     box-shadow: none;
     border: 1px solid transparent;
-	color:#ccc
+    color:#ccc
 }
 .btn.uppercase {
     text-transform: uppercase
@@ -2269,18 +2269,18 @@ textarea {background:#222; border-color:#222}
     background-color: #222;
     color: #ccc;
     border-color: #333;
-	border-radius:0px;
-	font-size:11px;
-	font-weight:bold;
-	text-transform:uppercase;
-	    font-family: 'Montserrat', sans-serif;
+    border-radius:0px;
+    font-size:11px;
+    font-weight:bold;
+    text-transform:uppercase;
+        font-family: 'Montserrat', sans-serif;
 }
 .btn-default:hover,
 .btn-default:active,
 .btn-default.hover {
     background-color: #fff;
-	color:#333;
-	border-color: #ccc;
+    color:#333;
+    border-color: #ccc;
 }
 .btn-primary {
     background-color: #1ab394;
@@ -2595,8 +2595,8 @@ textarea {background:#222; border-color:#222}
 .pagination>li>a {
     background:none;
     color: #999;
-	padding: 2px 10px;
-	border-radius:0px
+    padding: 2px 10px;
+    border-radius:0px
 }
 
 .pagination-sm > li:first-child > a {border-radius:0px}
@@ -2663,8 +2663,8 @@ textarea {background:#222; border-color:#222}
 .table>tbody>tr>td,
 .table>tfoot>tr>td {
     border-bottom: 1px solid #333;
-	padding:10px 20px;
-	border-top:none
+    padding:10px 20px;
+    border-top:none
 }
 
 .table-hover>tbody>tr:hover {
@@ -2676,8 +2676,8 @@ textarea {background:#222; border-color:#222}
 }
 .table tr td .progress {
     margin-top: 5px;
-	color:#333;
-	    background-color: #666;
+    color:#333;
+        background-color: #666;
 }
 .table-bordered {
     border: 1px solid #333
@@ -3026,11 +3026,11 @@ table.text-center th {
     font-size: 20px;
     font-weight: bold;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-	text-align:center
+    text-align:center
 }
 .widget-user .widget-user-desc {
     margin-top: 0;
-	text-align:center
+    text-align:center
 }
 .widget-user .widget-user-image {
     position: absolute;
@@ -4208,12 +4208,12 @@ table.text-center th {
 .label-danger,
 .modal-danger .modal-body {
     background-color: #f4364c !important;
-	border-radius:3px;
-	font-size: 11px;
+    border-radius:3px;
+    font-size: 11px;
 }
 
 .badge {border-radius:3px;
-	font-size: 11px;}
+    font-size: 11px;}
 
 .bg-yellow,
 .callout.callout-warning,
@@ -4252,7 +4252,7 @@ table.text-center th {
 }
 .bg-teal {
     background-color: #222 !important;
-	color:#ccc!important
+    color:#ccc!important
 
 }
 .bg-olive {
@@ -4451,7 +4451,7 @@ table.text-center th {
 }
 .bg-light-blue-gradient {
     background: #;
-	padding-bottom:30px
+    padding-bottom:30px
 }
 
 .bg-light-blue-gradient canvas {width:100%!important}
@@ -4934,7 +4934,7 @@ Top stats
     padding: 0px;
     margin-top: 0px;
     margin-bottom: 22px;
-	box-shadow: 0px 3px 8px -4px rgba(0,0,0,0.15);
+    box-shadow: 0px 3px 8px -4px rgba(0,0,0,0.15);
 }
 
 .content-wrapper .row1 {margin-bottom:30px;}
@@ -4972,20 +4972,20 @@ Top stats
     padding: 0px;
     margin-top: 0px;
     margin-bottom: 22px;}
-	
-#sum_box .progress-bar-warning	{background:#fad771}
+    
+#sum_box .progress-bar-warning    {background:#fad771}
 
 #sum_box .panel-body {
     padding: 0px;
 }
-	
+    
 .content-wrapper .row2 {
     overflow: hidden;
     background: #f2f6f9;
     margin-bottom: 20px;}
-	
-	
-#sales-chart tspan {font-family:'Montserrat', sans-serif!important; font-size:8px!important; text-transform:uppercase; letter-spacing:0.5px}	
+    
+    
+#sales-chart tspan {font-family:'Montserrat', sans-serif!important; font-size:8px!important; text-transform:uppercase; letter-spacing:0.5px}    
 tspan {font-family:'Montserrat', sans-serif!important;}
 .profile {overflow:inherit}
 
@@ -4997,18 +4997,18 @@ calendar
 .datepicker td.day:hover {
     background: #111;
     cursor: pointer;
-	color:#ccc
+    color:#ccc
 }
 
 .datepicker thead tr:first-child th:hover {
     background: #111;
     cursor: pointer;
-	color:#ccc
+    color:#ccc
 }
 
 #calendar .table>thead>tr>th {
     border-bottom: 2px rgba(255,255,255,0.1) solid;
-	padding: 7px 18px;
+    padding: 7px 18px;
 }
 #calendar table thead {}
 .calendar .calender_btn {background:#222!important; color:#999!important; padding-right:10px!important}
